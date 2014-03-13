@@ -1,3 +1,4 @@
+#!/usr/bin/python
 #This is the script which works for the text written in English or INTENDED to be written in English. This text may or may not be grammatically correct. Our aim is to normalise the repititions in the word.
 ########Author Akshay Minocha ( ksnmi | minocha )##############
 ########mailto:akshayminocha5@gmail.com########################
@@ -77,7 +78,7 @@ def generate_all_variations(tuple_info):
 
 def main():
   #wordlist=pickle.load(open("wordlist_dic"))
-  input1=open(sys.argv[1])
+  input1=sys.stdin.readlines()
   #output format of the first stage will be 
   #^original_word/candidate1/candidate2/candidate3 and so on$
   list_of_tokens=[]

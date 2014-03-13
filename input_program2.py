@@ -1,3 +1,4 @@
+#!/usr/bin/python
 ########Author Akshay Minocha ( ksnmi | minocha )##############
 ########mailto:akshayminocha5@gmail.com########################
 import pickle
@@ -6,9 +7,12 @@ import sys
 
 
 def main():
-  f=open(sys.argv[1])
+  f=sys.stdin.readlines()
   english_wordlist=pickle.load(open("wordlist_dic"))
-  for line in f:
+  d=[]
+  for i in f:
+    d+=[i.split()[0]]
+  for line in d:
     text=line[1:-2].split("/")
     original_word=text[0]
     if original_word.lower() in english_wordlist:
