@@ -3,7 +3,11 @@
 
 Usage ::
 
-     cat sample | ./input_program1.py |./input_program2.py 
+     cat sample | ./input_program1.py |./input_program2.py
+
+                        OR
+
+    echo "Hellooooooo" | ./input_program1.py | ./input_program2.py  
  
 Our main aim is to standardise the words with repititive characters
 The script works for english now since the list of english words as a python dictionary object is available in the folder by the name of english_dic
