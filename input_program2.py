@@ -5,6 +5,7 @@
 import sys
 import itertools
 import string
+special_characters=['^','$','/']
 def ambiguated_output(list_of_tokens):
   dl=[]
   s='^'
@@ -14,8 +15,25 @@ def ambiguated_output(list_of_tokens):
   return s
 
 def disambiguated_output(line):
-  x=line[1:-2]   # ^ and $ symbols are ommitted   not liine.. this is per token
-  tokens=x.split("/")
+  x=line[1:-1]   # ^ and $ symbols are ommitted   not liine.. this is per token
+  tokens=[]
+  word=""
+  flag=0
+  temp=0
+  for i in range(0,len(x)-1): 
+    if i<temp:
+      continue
+    if x[i]=="\\":
+      word+=x[i]+x[i+1]
+      temp=i+2
+      print i, "change"
+      continue
+    if x[i]=="/":
+      tokens+=[word] 
+      word=""
+      continue
+    word+=x[i]
+  tokens+=[word]
   return tokens
 
 def check_repitition(word):
