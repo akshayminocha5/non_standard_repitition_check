@@ -26,7 +26,6 @@ def disambiguated_output(line):
     if x[i]=="\\":
       word+=x[i]+x[i+1]
       temp=i+2
-      print i, "change"
       continue
     if x[i]=="/":
       tokens+=[word] 
