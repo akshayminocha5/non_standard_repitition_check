@@ -8,13 +8,21 @@ import string
 special_characters=['^','$','/']
 def ambiguated_output(list_of_tokens):
   dl=[]
-  s='^'
-  for word_token in list_of_tokens[:-1]:
-    s+=word_token+"/"
-  s+=list_of_tokens[-1]+"$"
-  return s
+  for word_token in list_of_tokens:
+    s='^'
+    s+=word_token[0]+"/"
+    l=[]
+    for word in word_token[1:]:
+      if word in l:
+        continue
+      else:
+        l+=[word]
+    j='/'.join(l)
+    s=s+j+'$'
+    dl+=[s]
+  return dl
 
-def disambiguated_output(line):
+def disambiguated_output_word(line):
   x=line[1:-1]   # ^ and $ symbols are ommitted   not liine.. this is per token
   tokens=[]
   word=""
@@ -32,6 +40,7 @@ def disambiguated_output(line):
       word=""
       continue
     word+=x[i]
+  word+=x[i+1]
   tokens+=[word]
   return tokens
 
@@ -110,19 +119,21 @@ def main():
   input1=sys.stdin.readlines()
   dl=[]
   for line in input1:
-    dl+=[line]
-  #each token in the list
-  new_sent=[]
-  for i in dl:
-    new_sent+=[disambiguated_output(i)]
-  for word in new_sent:
-    i=word[-1]
-    if check_repitition(i)==1:
-      gv=generate_all_variations(generate_variations(i))
-      l=word[:2]+gv
-      print ambiguated_output(l)
-    else:
-      print ambiguated_output(word)
+    dl+=[line.split()]
+  for line in dl:
+    new_sent=[]
+    for token in line:
+      new_sent+=[disambiguated_output_word(token)] # ,"token"  #token
+    ntt=[]
+    for word in new_sent:
+      i=word[-1]
+      if check_repitition(i)==1:
+        gv=generate_all_variations(generate_variations(i))
+        l=word[:2]+gv
+        ntt+=[l]
+      else:
+        ntt+=[word]
+    print " ".join(ambiguated_output(ntt))
   
 if __name__=="__main__":
   main()

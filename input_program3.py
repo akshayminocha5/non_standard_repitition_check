@@ -31,22 +31,25 @@ def main():
   english_wordlist=pickle.load(open("wordlist_dic"))
   d=[]
   for i in f:
-    d+=[i.split()[0]]
-  for line in d:
-    text=disambiguated_output(line)  #line[1:-2].split("/")
-    original_word=text[0]
-    if original_word.lower() in english_wordlist:
-      print original_word
-      continue
-    else:
-      flag=0
-      for i in text[1:]:
-        if i.lower() in english_wordlist:
-          print i
-          flag=1
-          break
+    d+=[i.split()]   # all tokens in line
+  for tokens in d:
+    x=[]
+    for token in tokens:
+      text=disambiguated_output(token)  #line[1:-2].split("/")
+      original_word=text[0]
+      if original_word.lower() in english_wordlist:
+        x+=[original_word]
+        continue
+      else:
+        flag=0
+        for i in text[1:]:
+          if i.lower() in english_wordlist:
+            x+=[i]   #print i
+            flag=1
+            break
       if flag==0:
-        print original_word
+        x+=[original_word]  #original_word
+    print " ".join(x)
 
 
 
